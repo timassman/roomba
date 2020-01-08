@@ -1237,7 +1237,7 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_toggleSpot = new JButton();
 						ledPanel1.add(but_toggleSpot);
 						but_toggleSpot.setActionCommand("toggleSpot");
-						but_toggleSpot.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_spotOn.png")));
+						but_toggleSpot.setIcon(new ImageIcon(getClass().getResource("images/but_spotOn.png")));
 						but_toggleSpot.setPreferredSize(new java.awt.Dimension(46, 50));
 						but_toggleSpot.setSize(40, 40);
 						but_toggleSpot.addActionListener(this);
@@ -1246,7 +1246,7 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_toggleClean = new JButton();
 						ledPanel1.add(but_toggleClean);
 						but_toggleClean.setActionCommand("toggleClean");
-						but_toggleClean.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_cleanOn.png")));
+						but_toggleClean.setIcon(new ImageIcon(getClass().getResource("images/but_cleanOn.png")));
 						but_toggleClean.setPreferredSize(new java.awt.Dimension(40, 40));
 						but_toggleClean.setSize(40, 40);
 						but_toggleClean.addActionListener(this);
@@ -1255,7 +1255,7 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_toggleDirt = new JButton();
 						ledPanel1.add(but_toggleDirt);
 						but_toggleDirt.setActionCommand("toggleDirt");
-						but_toggleDirt.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_dirtOn.png")));
+						but_toggleDirt.setIcon(new ImageIcon(getClass().getResource("images/but_dirtOn.png")));
 						but_toggleDirt.setPreferredSize(new java.awt.Dimension(40, 40));
 						but_toggleDirt.setSize(40, 40);
 						but_toggleDirt.addActionListener(this);
@@ -1264,7 +1264,7 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_toggleMax = new JButton();
 						ledPanel1.add(but_toggleMax);
 						but_toggleMax.setActionCommand("toggleMax");
-						but_toggleMax.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_maxOn.png")));
+						but_toggleMax.setIcon(new ImageIcon(getClass().getResource("images/but_maxOn.png")));
 						but_toggleMax.setSize(40, 40);
 						but_toggleMax.setPreferredSize(new java.awt.Dimension(40, 40));
 						but_toggleMax.addActionListener(this);
@@ -1273,7 +1273,7 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_toggleDock = new JButton();
 						ledPanel1.add(but_toggleDock);
 						but_toggleDock.setActionCommand("toggleDock");
-						but_toggleDock.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_dockOn.png")));
+						but_toggleDock.setIcon(new ImageIcon(getClass().getResource("images/but_dockOn.png")));
 						but_toggleDock.setPreferredSize(new java.awt.Dimension(40, 40));
 						but_toggleDock.setSize(40, 40);
 						but_toggleDock.addActionListener(this);
@@ -1282,7 +1282,7 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_toggleCheckRobot = new JButton();
 						ledPanel1.add(but_toggleCheckRobot);
 						but_toggleCheckRobot.setActionCommand("toggleCheckRobot");
-						but_toggleCheckRobot.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_checkrobotOn.png")));
+						but_toggleCheckRobot.setIcon(new ImageIcon(getClass().getResource("images/but_checkrobotOn.png")));
 						but_toggleCheckRobot.setPreferredSize(new java.awt.Dimension(40, 40));
 						but_toggleCheckRobot.setSize(40, 40);
 						but_toggleCheckRobot.addActionListener(this);
@@ -1354,42 +1354,42 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_turnleft = new JButton();
 						ctrlPanel1.add(but_turnleft);
 						but_turnleft.setActionCommand("turnleft");
-						but_turnleft.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_turnleft.png")));
+						but_turnleft.setIcon(new ImageIcon(getClass().getResource("images/but_turnleft.png")));
 						but_turnleft.addActionListener(this);
 					}
 					{
 						JButton but_forward = new JButton();
 						ctrlPanel1.add(but_forward);
 						but_forward.setActionCommand("forward");
-						but_forward.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_forward.png")));
+						but_forward.setIcon(new ImageIcon(getClass().getResource("images/but_forward.png")));
 						but_forward.addActionListener(this);
 					}
 					{
 						JButton but_turnright = new JButton();
 						ctrlPanel1.add(but_turnright);
 						but_turnright.setActionCommand("turnright");
-						but_turnright.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_turnright.png")));
+						but_turnright.setIcon(new ImageIcon(getClass().getResource("images/but_turnright.png")));
 						but_turnright.addActionListener(this);
 					}
 					{
 						JButton but_spinleft = new JButton();
 						ctrlPanel1.add(but_spinleft);
 						but_spinleft.setActionCommand("spinleft");
-						but_spinleft.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_spinleft.png")));
+						but_spinleft.setIcon(new ImageIcon(getClass().getResource("images/but_spinleft.png")));
 						but_spinleft.addActionListener(this);
 					}
 					{
 						JButton but_stop = new JButton();
 						ctrlPanel1.add(but_stop);
 						but_stop.setActionCommand("stop");
-						but_stop.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_stop.png")));
+						but_stop.setIcon(new ImageIcon(getClass().getResource("images/but_stop.png")));
 						but_stop.addActionListener(this);
 					}
 					{
 						JButton but_spinright = new JButton();
 						ctrlPanel1.add(but_spinright);
 						but_spinright.setActionCommand("spinright");
-						but_spinright.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_spinright.png")));
+						but_spinright.setIcon(new ImageIcon(getClass().getResource("images/but_spinright.png")));
 						but_spinright.addActionListener(this);
 					}
 					{
@@ -1399,7 +1399,7 @@ public class RoombaCommPanel extends JPanel implements ActionListener,
 						JButton but_backward = new JButton();
 						ctrlPanel1.add(but_backward);
 						but_backward.setActionCommand("backward");
-						but_backward.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/hackingroomba/roombacomm/images/but_backward.png")));
+						but_backward.setIcon(new ImageIcon(getClass().getResource("images/but_backward.png")));
 						but_backward.setPreferredSize(new java.awt.Dimension(55, 78));
 						but_backward.addActionListener(this);
 					}
