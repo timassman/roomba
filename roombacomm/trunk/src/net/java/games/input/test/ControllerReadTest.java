@@ -41,6 +41,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -57,22 +59,37 @@ import net.java.games.input.ControllerEnvironment;
 
 public class ControllerReadTest extends JFrame{
 	private static final long serialVersionUID = -7129976919159465311L;
+	private ActionListener controllerListener;
+	public ActionListener getControllerListener() { return controllerListener; }
 
-	private abstract static class AxisPanel extends JPanel{
+	private abstract class AxisPanel extends JPanel{
 		private static final long serialVersionUID = -2117191506803328790L;
 		Component axis;
 		float data;
+		float oldData;
+		JLabel nameLabel;
+		JLabel stateLabel;
 
 		public AxisPanel(Component ax){
 			axis = ax;
 			setLayout(new BorderLayout());
-			add(new JLabel(ax.getName()+"("+ax.getIdentifier()+")"),
-					BorderLayout.NORTH);
+			nameLabel  = new JLabel(ax.getName()+"("+ax.getIdentifier()+")");
+			stateLabel = new JLabel("<unread>");
+			add(nameLabel,  BorderLayout.NORTH);
+			add(stateLabel, BorderLayout.CENTER);
 		}
 
 		public void poll(){
 			data = axis.getPollData();
-			renderData();
+			if ( data != oldData ) // only render when data has changed
+			{
+				renderData();
+				if (ControllerReadTest.this.getControllerListener() != null) {
+					ControllerReadTest.this.getControllerListener().actionPerformed(
+							new ActionEvent(this, 0, nameLabel.getText() + ":" + stateLabel.getText()));					
+				}
+			}
+			oldData = data;
 		}
 
 		public Component getAxis() {
@@ -82,95 +99,88 @@ public class ControllerReadTest extends JFrame{
 		protected abstract void renderData();
 	}
 
-	private static class DigitalAxisPanel extends AxisPanel {
+	private class DigitalAxisPanel extends AxisPanel {
 		private static final long serialVersionUID = -4006900519933869168L;
-		JLabel digitalState = new JLabel("<unread>");
 
 		public DigitalAxisPanel(Component ax) {
 			super(ax);
-			add(digitalState,BorderLayout.CENTER);
 		}
 
 		protected void renderData(){
 			if (data == 0.0f){
-				digitalState.setBackground(getBackground());
-				digitalState.setText("OFF");
+				stateLabel.setBackground(getBackground());
+				stateLabel.setText("OFF");
 			} else if ( data == 1.0f) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("ON");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("ON");
 			}else { // shoudl never happen
-				digitalState.setBackground(Color.red);
-				digitalState.setText("ERR:"+data);
+				stateLabel.setBackground(Color.red);
+				stateLabel.setText("ERR:"+data);
 			}
-			digitalState.repaint();
+			stateLabel.repaint();
 		}
 	}
 
-	private static class DigitalHatPanel extends AxisPanel {
+	private class DigitalHatPanel extends AxisPanel {
 		private static final long serialVersionUID = -3293100130201231029L;
-		JLabel digitalState = new JLabel("<unread>");
 
 		public DigitalHatPanel(Component ax) {
 			super(ax);
-			add(digitalState,BorderLayout.CENTER);
 		}
 
 		protected void renderData(){
 			if (data == Component.POV.OFF){
-				digitalState.setBackground(getBackground());
-				digitalState.setText("OFF");
+				stateLabel.setBackground(getBackground());
+				stateLabel.setText("OFF");
 			} else if ( data == Component.POV.UP) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("UP");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("UP");
 			} else if ( data == Component.POV.UP_RIGHT) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("UP+RIGHT");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("UP+RIGHT");
 			} else if ( data == Component.POV.RIGHT) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("RIGHT");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("RIGHT");
 			} else if ( data == Component.POV.DOWN_RIGHT) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("DOWN+RIGHT");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("DOWN+RIGHT");
 			} else if ( data == Component.POV.DOWN) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("DOWN");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("DOWN");
 			} else if ( data == Component.POV.DOWN_LEFT) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("DOWN+LEFT");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("DOWN+LEFT");
 			} else if ( data == Component.POV.LEFT) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("LEFT");    
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("LEFT");    
 			} else if ( data == Component.POV.UP_LEFT) {
-				digitalState.setBackground(Color.green);
-				digitalState.setText("UP+LEFT");
+				stateLabel.setBackground(Color.green);
+				stateLabel.setText("UP+LEFT");
 			}else { // shoudl never happen
-				digitalState.setBackground(Color.red);
-				digitalState.setText("ERR:"+data);
+				stateLabel.setBackground(Color.red);
+				stateLabel.setText("ERR:"+data);
 			}
-			digitalState.repaint();
+			stateLabel.repaint();
 		}
 	}
-	private static class AnalogAxisPanel extends AxisPanel {
+	private class AnalogAxisPanel extends AxisPanel {
 		private static final long serialVersionUID = -3220244985697453835L;
-		JLabel analogState = new JLabel("<unread>");
 
 		public AnalogAxisPanel(Component ax) {
 			super(ax);
-			add(analogState,BorderLayout.CENTER);
 		}
 
 		protected void renderData(){
 			String extra = "";
 			if (getAxis().getDeadZone() >= Math.abs(data))
 				extra = " (DEADZONE)";
-			analogState.setText(""+data+extra);
-			analogState.repaint();
+			stateLabel.setText(""+data+extra);
+			stateLabel.repaint();
 		}
 	}
 
 
-
-	private static class ControllerWindow extends JFrame {
+	private class ControllerWindow extends JFrame {
 		private static final long serialVersionUID = 5812903945250431578L;
 		Controller ca;
 		List<AxisPanel> axisList = new ArrayList<>();
@@ -254,8 +264,9 @@ public class ControllerReadTest extends JFrame{
 	static final long HEARTBEATMS =100; // 10th of a second
 	List<ControllerWindow> controllers = new ArrayList<>();
 
-	public ControllerReadTest() {
+	public ControllerReadTest(ActionListener _controllerListener) {
 		//super("Controller Read Test. Version: " + Version.getVersion());
+		this.controllerListener = _controllerListener;
 		ControllerEnvironment ce = ControllerEnvironment.getDefaultEnvironment();
 		Controller[] ca = ce.getControllers();
 		for(int i =0;i<ca.length;i++){
@@ -282,7 +293,7 @@ public class ControllerReadTest extends JFrame{
 		pack();
 		setSize(400,400);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setVisible(true);
+		//setVisible(true); //setVisible(true) seems to open a new empty window?
 	}
 
 	private void makeController(Controller c) {
@@ -304,7 +315,8 @@ public class ControllerReadTest extends JFrame{
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		new ControllerReadTest().setVisible(true);
+		//new ControllerReadTest().setVisible(true); //setVisible(true) seems to open a new empty window?
+		new ControllerReadTest(null);
 	}
 
 }
