@@ -273,8 +273,9 @@ public class ControllerReadTest extends JFrame{
 			makeController(ca[i]);
 		}
 
-		new Thread(() ->{
-				try {
+		new Thread(new Runnable(){
+	        public void run(){
+	        	try {
 					while(true){
 						for(Iterator<ControllerWindow> i=controllers.iterator();i.hasNext();){
 							try {
@@ -289,7 +290,8 @@ public class ControllerReadTest extends JFrame{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		}).start();
+	        }
+	    }).start();
 		pack();
 		setSize(400,400);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
