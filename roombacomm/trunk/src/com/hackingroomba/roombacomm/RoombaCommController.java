@@ -31,6 +31,11 @@ public class RoombaCommController implements ActionListener {
 			case "pov(pov):UP": 		roombaCmd = "forward"; 		break;
 			case "pov(pov):UP+RIGHT": 	roombaCmd = "spinright"; 	break;
 			case "pov(pov):RIGHT": 		roombaCmd = "turnright"; 	break;
+			case "Start(Start):ON":		roombaCmd = "connect";      break;
+			case "Select(Select):ON":	roombaCmd = "disconnect";   break;
+			case "A(A):ON":				roombaCmd = "safe";      	break;
+			case "B(B):ON":				roombaCmd = "full";      	break;
+			case "X(X):ON":				roombaCmd = "passive";     	break;
 			default:
 				System.out.println("unhandled: " + controllerCmd);
 				return; // for other values, do nothing
